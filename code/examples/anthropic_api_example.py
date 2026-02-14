@@ -1,7 +1,10 @@
 import anthropic
+import os
 
+# It's recommended to use environment variables for API keys
+# Set your API key as: export ANTHROPIC_API_KEY='your-api-key-here'
 client = anthropic.Anthropic(
-    api_key="your-api-key-here"  # Better: use environment variable
+    api_key=os.environ.get("ANTHROPIC_API_KEY")
 )
 
 message = client.messages.create(
@@ -12,4 +15,6 @@ message = client.messages.create(
     ]
 )
 
-print(message.content)
+# message.content is a list of content blocks
+# Access the text content from the first block
+print(message.content[0].text)
